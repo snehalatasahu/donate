@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div class="jumbotron">
+        <h1>Now donate conveniently for a nobel cause!</h1>
+    </div>
+    <div class="d-flex justify-content-center">
+        <form method="post" action="{% url 'create_bill' %}" autocomplete="off" enctype="multipart/form-data">
+            <h5>Name: {{ donor.name }}</h5>
+            <h5>City: {{ donor.city }}</h5>
+            <h5>Email: {{ donor.email }}</h5>
+            <h5>Amount: {{ donor.amount }}</h5>
+            {% csrf_token %}
+            <script
+                src="https://checkout.razorpay.com/v1/checkout.js"
+                data-key={{public_key}}
+                data-amount= {{amount_in_paise}}
+                data-buttontext="Donate"
+                data-name="Donate"
+                data-description=""
+                data-image="https://your-awesome-site.com/your_logo.jpg"
+                data-prefill.name={{donor.name}}
+                data-prefill.email="test@test.com"
+                data-theme.color="#F37254"
+                data-notes.address={{donor.city}}
+            ></script>
+        </form>
+    </div>
+   
+    
+    
+</body>
+</html>
+
